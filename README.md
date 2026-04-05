@@ -64,3 +64,8 @@ Scene:
 Interactions:  
 1. Click on items inside Database to add them to Player Inventory. (You add 1 count of a clicked item to player)  
 2. Click on items inside Player Inventory to remove them. (You remove 1 item count when clicked. At zero count, item will be deleted)  
+
+TODO:  
+  
+1. Add ItemBehaviours that can be Executed on: Use, Aquisition, Lost  
+2. Add a gamification mechanic... Item Collections and bonuses (behaviours) on full collection in inventory?..
