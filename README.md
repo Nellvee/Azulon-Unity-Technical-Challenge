@@ -28,5 +28,5 @@ This challenge focuses on structure, clarity, extensibility, and design thinking
 
 ### Result
 Time UTC+3
-start in ~10:00 
-pause in 14:40 
+  start in ~10:00
+  pause in 14:40 
