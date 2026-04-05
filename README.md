@@ -55,8 +55,12 @@ UI:
 2. Full database of Items in Project  (PlayerInventoryGridUI.cs)  
   
 Scene:  
-0. Default template objects (Camera, Volume...)  
-1. Player - simple script with Inventory inside  
-2. UIManager - reference to global UITooltipObject  
-3. UI -> Canvas 1 - canvas for Player Inventory (right screen)  
-4. UI -> Canvas 2 - canvas for Item Database (left screen)  
+1. Default template objects (Camera, Volume...)  
+2. Player - simple script with Inventory inside  
+3. UIManager - reference to global UITooltipObject  
+4. UI -> Canvas 1 - canvas for Player Inventory (right screen)  
+5. UI -> Canvas 2 - canvas for Item Database (left screen)  
+  
+Interactions:  
+1. Click on items inside Database to add them to Player Inventory. (You add 1 count of a clicked item to player)  
+2. Click on items inside Player Inventory to remove them. (You remove 1 item count when clicked. At zero count, item will be deleted)  
