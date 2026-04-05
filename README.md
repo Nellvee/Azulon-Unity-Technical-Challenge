@@ -27,6 +27,7 @@ This challenge focuses on structure, clarity, extensibility, and design thinking
 - The project must include at least one meaningful and fun gamification mechanic directly tied to item collection or inventory progression.
 
 ### Result
-Time UTC+3
-  start in ~10:00
-  pause in 14:40 
+Time UTC+3  
+start in ~10:00  
+pause in 14:40  
+resume at 15:20  
