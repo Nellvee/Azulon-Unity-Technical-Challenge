@@ -13,15 +13,18 @@ MonoBehaviour:
   m_Name: new_item_02
   m_EditorClassIdentifier: Assembly-CSharp::Project.Items.ItemDataSO
   _id: new_item_02
-  _displayName: 
-  _description: 
-  _stackSize: 0
+  _displayName: My Item 2
+  _description: 'description 2
+
+'
+  _stackSize: 2
   _iconSprite:
-    m_AssetGUID: 
-    m_SubObjectName: 
-    m_SubObjectType: 
-    m_SubObjectGUID: 
-    m_EditorAssetChanged: 0
+    m_AssetGUID: 67d556891a0871541842a9d80a487b2f
+    m_SubObjectName: acid-blob
+    m_SubObjectType: UnityEngine.Sprite, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+    m_SubObjectGUID: aba27210e615ce045ada7ac1559639c2
+    m_EditorAssetChanged: 1
   _worldPrefab:
     m_AssetGUID: 
     m_SubObjectName: 

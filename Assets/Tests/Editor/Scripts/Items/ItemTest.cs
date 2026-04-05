@@ -2,6 +2,7 @@ using NUnit.Framework;
 using Project.Items;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 using UnityEngine.TestTools;
 
 namespace Project.Testing.Editor.Items
@@ -15,6 +16,8 @@ namespace Project.Testing.Editor.Items
             public string DisplayName { get; set; }
             public string Description { get; set; }
             public int StackSize { get; set; }
+
+            public AssetReferenceSprite IconSprite => throw new System.NotImplementedException();
         }
 
         private MockItemData _testData;

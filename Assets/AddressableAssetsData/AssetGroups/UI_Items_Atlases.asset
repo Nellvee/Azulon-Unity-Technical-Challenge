@@ -15,7 +15,7 @@ MonoBehaviour:
   m_GroupName: UI_Items_Atlases
   m_GUID: 3d77381a3f370b145861ae653aeafbfe
   m_SerializeEntries:
-  - m_GUID: defee96098cb7df49a477385c7031785
+  - m_GUID: 67d556891a0871541842a9d80a487b2f
     m_Address: MyItemCategory1_Icons_SpriteAtlas
     m_ReadOnly: 0
     m_SerializedLabels: []

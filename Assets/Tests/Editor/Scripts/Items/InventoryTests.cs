@@ -3,6 +3,7 @@ using Project.Items;
 using Project.Items._Inventory;
 using System.Linq;
 using System.Threading.Tasks;
+using UnityEngine.AddressableAssets;
 
 namespace Project.Testing.Editor.Items
 {
@@ -15,6 +16,8 @@ namespace Project.Testing.Editor.Items
             public string DisplayName { get; set; }
             public string Description { get; set; }
             public int StackSize { get; set; }
+
+            public AssetReferenceSprite IconSprite => throw new System.NotImplementedException();
         }
 
         private class MockFactory : IItemFactory

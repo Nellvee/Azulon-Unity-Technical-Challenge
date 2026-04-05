@@ -26,8 +26,13 @@ This challenge focuses on structure, clarity, extensibility, and design thinking
     - Unity built-in packages are fine; avoid third-party architecture frameworks.
 - The project must include at least one meaningful and fun gamification mechanic directly tied to item collection or inventory progression.
 
-### Result
+### Timing  
+  
 Time UTC+3  
 start in ~10:00  
 pause in 14:40  
 resume at 15:20  
+stop at 20:58  
+  
+Total for now: ~11h  
+

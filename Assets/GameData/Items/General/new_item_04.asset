@@ -13,15 +13,18 @@ MonoBehaviour:
   m_Name: new_item_04
   m_EditorClassIdentifier: Assembly-CSharp::Project.Items.ItemDataSO
   _id: new_item_04
-  _displayName: 
-  _description: 
-  _stackSize: 0
+  _displayName: My Item 4
+  _description: 'description 4
+
+'
+  _stackSize: 4
   _iconSprite:
-    m_AssetGUID: 
-    m_SubObjectName: 
-    m_SubObjectType: 
-    m_SubObjectGUID: 
-    m_EditorAssetChanged: 0
+    m_AssetGUID: 67d556891a0871541842a9d80a487b2f
+    m_SubObjectName: aerial-signal
+    m_SubObjectType: UnityEngine.Sprite, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+    m_SubObjectGUID: 3e621c31c26d5f8449b1f4875d76a779
+    m_EditorAssetChanged: 1
   _worldPrefab:
     m_AssetGUID: 
     m_SubObjectName: 

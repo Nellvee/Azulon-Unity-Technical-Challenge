@@ -13,15 +13,16 @@ MonoBehaviour:
   m_Name: new_item_05
   m_EditorClassIdentifier: Assembly-CSharp::Project.Items.ItemDataSO
   _id: new_item_05
-  _displayName: 
-  _description: 
-  _stackSize: 0
+  _displayName: My Item 5
+  _description: description 5
+  _stackSize: 5
   _iconSprite:
-    m_AssetGUID: 
-    m_SubObjectName: 
-    m_SubObjectType: 
-    m_SubObjectGUID: 
-    m_EditorAssetChanged: 0
+    m_AssetGUID: 67d556891a0871541842a9d80a487b2f
+    m_SubObjectName: aerodynamic-harpoon
+    m_SubObjectType: UnityEngine.Sprite, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+    m_SubObjectGUID: 7a0bf65e0119d3342a710c51a4232513
+    m_EditorAssetChanged: 1
   _worldPrefab:
     m_AssetGUID: 
     m_SubObjectName: 
