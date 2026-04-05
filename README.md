@@ -35,4 +35,28 @@ resume at 15:20
 stop at 20:58  
   
 Total for now: ~11h  
-
+  
+### Result  
+  
+Items are structured with this idea:  
+1. ItemData - read-only data (ItemDataSO.cs)  
+2. Item - runtime object data (Item.cs)  
+3. ItemDatabase - Database of items. Handled fully by Addressables Group.  
+4. ItemsEditorWindowCreation - (ItemEditorWindow.cs): Unity -> Tools -> Item Manager:  
+Editor Window that creates ItemData Scriptable Object assets in specific folder.  
+Setups those assets with Addressables Group/Labels.  
+Simple search & edit of created assets.  
+5. Inventory - simple inventory system that can add/remove items in it.  
+6. ItemFactory - handles how ItemDataSO is loaded from Addressables.  
+7. CustomItems that inherit ItemDataSO & Item classes.  
+  
+UI:  
+1. Full inventory of a Player  (ItemDatabaseGridUI.cs)  
+2. Full database of Items in Project  (PlayerInventoryGridUI.cs)  
+  
+Scene:  
+0. Default template objects (Camera, Volume...)  
+1. Player - simple script with Inventory inside  
+2. UIManager - reference to global UITooltipObject  
+3. UI -> Canvas 1 - canvas for Player Inventory (right screen)  
+4. UI -> Canvas 2 - canvas for Item Database (left screen)  
