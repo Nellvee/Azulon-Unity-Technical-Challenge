@@ -52,10 +52,14 @@ Simple search & edit of created assets.
 5. Inventory - simple inventory system that can add/remove items in it.  
 6. ItemFactory - handles how ItemDataSO is loaded from Addressables.  
 7. CustomItems that inherit ItemDataSO & Item classes.  
+
+8. ItemBehaviours - ItemData will store list of ItemBehaviours that will do something when: Acquired, Used, Lost.  
+9. Collection Ledger - List of Items that will be discovered once collected into inventory. Track and progression.  
   
 UI:  
 1. Full inventory of a Player  (ItemDatabaseGridUI.cs)  
 2. Full database of Items in Project  (PlayerInventoryGridUI.cs)  
+3. Collection Ledger, registry name, progress. Popup for each item discovered  
   
 Scene:  
 1. Default template objects (Camera, Volume...)  
@@ -63,12 +67,23 @@ Scene:
 3. UIManager - reference to global UITooltipObject  
 4. UI -> Canvas 1 - canvas for Player Inventory (right screen)  
 5. UI -> Canvas 2 - canvas for Item Database (left screen)  
+6. UI -> Canvas 3 - canvas for Collection Ledger that tracks progress of current collection registry and shows popup when you discover a new item.  
+
   
 Interactions:  
 1. Click on items inside Database to add them to Player Inventory. (You add 1 count of a clicked item to player)  
-2. Click on items inside Player Inventory to remove them. (You remove 1 item count when clicked. At zero count, item will be deleted)  
+2. Click on items inside Player Inventory to use and remove them. (You remove 1 item count when clicked. At zero count, item will be deleted)  
+(If item contains any Behaviour, it will call 'Use' of this Behaviour as well)
 
-TODO:  
-  
-1. Add ItemBehaviours that can be Executed on: Use, Aquisition, Lost  
-2. Add a gamification mechanic... Item Collections and bonuses (behaviours) on full collection in inventory?..
+Editor How To:  
+1. To Create a new ItemData, open: Unity -> Tools -> Items -> Item Manager. Write Item Id and click create.  
+2. To Create a new ItemBehaviour, open: Unity -> Tools -> Items -> Item Behaviours. Write Id and click create.  
+Each ItemData contain list of ItemBehaviours.  
+3. To Create a new Collection registry, open: Unity -> Tools -> Collection Ledger -> Registry  
+For now, Collection Ledger only able to track 1 registry.  
+Just fill registry with a list of ItemData Scriptable Objects.  
+4. To add itemData in database... You don't need anything, when you create ItemData (1.), it automatically adds this itemData into database.  
+Database itself is just an Addressables group.  
+5. 
+
+
