@@ -29,10 +29,12 @@ This challenge focuses on structure, clarity, extensibility, and design thinking
 ### Timing  
   
 Time UTC+3  
-start in ~10:00  
-pause in 14:40  
-resume at 15:20  
-stop at 20:58  
+start ~10:00  
+pause 14:40  
+resume 15:20  
+stop 20:58  
+---  
+resume 7:52  
   
 Total for now: ~11h  
   
