@@ -78,6 +78,7 @@ Editor How To:
 1. To Create a new ItemData, open: Unity -> Tools -> Items -> Item Manager. Write Item Id and click create.  
 2. To Create a new ItemBehaviour, open: Unity -> Tools -> Items -> Item Behaviours. Write Id and click create.  
 Each ItemData contain list of ItemBehaviours.  
+ItemBehaviours are custom scripts that do something, so you'll need to create a class that derives from abstract ItemBehaviourSO.cs, then go to EditorWindow and create this behaviour.  
 3. To Create a new Collection registry, open: Unity -> Tools -> Collection Ledger -> Registry  
 For now, Collection Ledger only able to track 1 registry.  
 Just fill registry with a list of ItemData Scriptable Objects.  
