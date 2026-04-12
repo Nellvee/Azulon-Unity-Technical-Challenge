@@ -33,9 +33,8 @@ start ~10:00
 pause 14:40  
 resume 15:20  
 stop 20:58  
----  
 resume 7:52  
-stop 12:48
+stop 12:48  
 
 Total for now: ~16h  
   
@@ -84,6 +83,3 @@ For now, Collection Ledger only able to track 1 registry.
 Just fill registry with a list of ItemData Scriptable Objects.  
 4. To add itemData in database... You don't need anything, when you create ItemData (1.), it automatically adds this itemData into database.  
 Database itself is just an Addressables group.  
-5. 
-
-
