@@ -35,8 +35,9 @@ resume 15:20
 stop 20:58  
 ---  
 resume 7:52  
-  
-Total for now: ~11h  
+stop 12:48
+
+Total for now: ~16h  
   
 ### Result  
   
