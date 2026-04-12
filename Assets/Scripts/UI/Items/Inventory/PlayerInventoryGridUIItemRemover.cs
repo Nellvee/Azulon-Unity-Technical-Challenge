@@ -1,6 +1,13 @@
+using Project.Items;
+using Project.Items._Inventory;
+using System.Collections.Generic;
 using UnityEngine;
 namespace Project.UI.Items
 {
+    /// <summary>
+    /// Simply remove item when clicked.
+    /// UPD: Was modified to also use item before removing
+    /// </summary>
     [RequireComponent(typeof(PlayerInventoryGridUI))]
     public class PlayerInventoryGridUIItemRemover : MonoBehaviour
     {
@@ -23,18 +30,27 @@ namespace Project.UI.Items
 
         private void ItemDatabase_OnSlotItemClicked(InventorySlotUI slot)
         {
-            _inventoryGrid.Inventory.TryRemoveItem(slot.BoundItem, 1);
+            //cache item
+            IItem targetItem = slot.BoundItem;
+            /// UPD: Was modified to also use item before removing
+            if (_inventoryGrid.Inventory is Inventory inventory)
+            {
+                inventory.UseItem(targetItem);
+            }
+            _inventoryGrid.Inventory.TryRemoveItem(targetItem, 1);
         }
         private void ItemDatabase_OnSlotBound(InventorySlotUI slot, Project.Items.IItem item)
         {
             //Try to modify slot tooltip
             if (slot.TryGetComponent(out InventorySlotTooltipUI slotTooltip))
             {
-                slotTooltip.OnRequestTooltipInfo += (item, lines) =>
-                {
-                    lines.Add($"<b>Try to click on item, to remove this Item from Player</b>");
-                };
+                slotTooltip.OnRequestTooltipInfo -= HandleRemoverTooltip;
+                slotTooltip.OnRequestTooltipInfo += HandleRemoverTooltip;
             }
+        }
+        private void HandleRemoverTooltip(IItem item, List<string> lines)
+        {
+            lines.Add($"<b>Try to click on item, to remove this Item from Player</b>");
         }
     }
 }

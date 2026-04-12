@@ -1,4 +1,6 @@
 using Project.Characters;
+using Project.Items;
+using System.Collections.Generic;
 using UnityEngine;
 namespace Project.UI.Items
 {
@@ -37,11 +39,13 @@ namespace Project.UI.Items
             //Try to modify slot tooltip
             if (slot.TryGetComponent(out InventorySlotTooltipUI slotTooltip))
             {
-                slotTooltip.OnRequestTooltipInfo += (item, lines) =>
-                {
-                    lines.Add($"<b>Try to click on item, to add this Item to Player</b>");
-                };
+                slotTooltip.OnRequestTooltipInfo -= HandleRemoverTooltip;
+                slotTooltip.OnRequestTooltipInfo += HandleRemoverTooltip;
             }
+        }
+        private void HandleRemoverTooltip(IItem item, List<string> lines)
+        {
+            lines.Add($"<b>Try to click on item, to add this Item to Player</b>");
         }
     }
 }

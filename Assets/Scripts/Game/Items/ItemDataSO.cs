@@ -1,3 +1,5 @@
+using Project.Items.Behaviours;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 namespace Project.Items
@@ -30,6 +32,11 @@ namespace Project.Items
         [SerializeField]
         private AssetReferenceGameObject _worldPrefab;
 
+        [Header("Behaviours")]
+        [SerializeField]
+        private List<ItemBehaviourSO> _behaviours;
+
+
         // ──────────────────────────────
         // Properties
         // ──────────────────────────────
@@ -53,7 +60,7 @@ namespace Project.Items
         }
         public AssetReferenceSprite IconSprite => _iconSprite;
         public AssetReferenceGameObject WorldPrefab => _worldPrefab;
-
+        public IReadOnlyList<IItemBehaviour> Behaviours => _behaviours;
 
         // ──────────────────────────────
         // Public methods

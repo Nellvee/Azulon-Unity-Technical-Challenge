@@ -1,5 +1,6 @@
 using Project.Items;
 using Project.Items._Inventory;
+using System;
 using UnityEngine;
 namespace Project.Characters
 {
@@ -10,6 +11,12 @@ namespace Project.Characters
     {
 
         // ──────────────────────────────
+        // Events
+        // ──────────────────────────────
+
+        public event Action<Player> OnInitialized;
+
+        // ──────────────────────────────
         // Serialized & Private Fields
         // ──────────────────────────────
 
@@ -18,7 +25,7 @@ namespace Project.Characters
         // ──────────────────────────────
         // Properties
         // ──────────────────────────────
-
+        public bool IsInitialized { get; private set; } = false;
         public IInventory Inventory => _inventory;
 
         // ──────────────────────────────
@@ -27,9 +34,12 @@ namespace Project.Characters
 
         private void Awake()
         {
-            _inventory = new Inventory(new AddressableItemFactory(), 200);
+            _inventory = new Inventory(gameObject, new AddressableItemFactory(), 200);
             _inventory.OnItemAdded += Inventory_OnItemAdded;
             _inventory.OnItemRemoved += Inventory_OnItemRemoved;
+
+            IsInitialized = true;
+            OnInitialized?.Invoke(this);
         }
 
         private async void Start()
@@ -56,5 +66,29 @@ namespace Project.Characters
         {
             Debug.Log($"Player.Inventory.OnItemAdded: {item}");
         }
+
+
+        // ──────────────────────────────
+        // Editor Test
+        // ──────────────────────────────
+        #region Editor
+#if UNITY_EDITOR
+        [ContextMenu("ShowAllInventory")]
+        public void ShowAllInventory()
+        {
+            Debug.Log($"Player: Items in inventory: {_inventory.Items.Count}");
+            if (_inventory.Items.Count > 0)
+            {
+                Debug.Log("Inventory Log started");
+                foreach (IItem item in _inventory.Items)
+                {
+                    Debug.Log($"Item in inventory: {item}");
+                }
+                Debug.Log("Inventory Log stopped");
+            }
+        }
+#endif
+        #endregion
+
     }
 }

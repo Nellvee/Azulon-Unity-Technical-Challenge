@@ -1,9 +1,9 @@
+using Project.Items.Behaviours;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using UnityEngine;
-using static UnityEditor.Progress;
 
 namespace Project.Items._Inventory
 {
@@ -38,7 +38,9 @@ namespace Project.Items._Inventory
         private int _maxCapacity = 10;
 
         private List<IItem> _items = new();
-        private IItemFactory _itemFactory;
+
+        private readonly GameObject _owner;
+        private readonly IItemFactory _itemFactory;
 
         // ──────────────────────────────
         // Properties
@@ -51,10 +53,11 @@ namespace Project.Items._Inventory
         // Constructors
         // ──────────────────────────────
 
-        public Inventory(IItemFactory itemFactory, int maxCapacity)
+        public Inventory(GameObject owner, IItemFactory itemFactory, int maxCapacity)
         {
-            _maxCapacity = maxCapacity;
+            _owner = owner;
             _itemFactory = itemFactory;
+            _maxCapacity = maxCapacity;
         }
 
         // ──────────────────────────────
@@ -132,6 +135,7 @@ namespace Project.Items._Inventory
                 OnItemsCountChanged?.Invoke(_items.Count);
                 NotifyInventoryChanged();
             }
+            ExecuteBehaviour(item, behaviour => behaviour.OnAcquired(CreateContext(item)));
             return true;
         }
         /// <summary>
@@ -142,18 +146,28 @@ namespace Project.Items._Inventory
         /// <returns></returns>
         public bool TryRemoveItem(IItem item, int count)
         {
-            if (!_items.Contains(item) || item.Count < count) return false;
+            // Use ReferenceEquals to ensure we are talking about THIS specific object instance
+            int index = _items.FindIndex(i => object.ReferenceEquals(i, item));
+
+            if (index == -1 || item.Count < count)
+            {
+                Debug.LogWarning("Item instance not found in inventory or insufficient count.");
+                return false;
+            }
 
             item.Count -= count;
 
             if (item.Count <= 0)
             {
-                _items.Remove(item);
+                // Remove specifically at the index we found
+                _items.RemoveAt(index);
 
                 OnItemRemoved?.Invoke(item);
                 OnItemsCountChanged?.Invoke(_items.Count);
                 NotifyInventoryChanged();
             }
+
+            ExecuteBehaviour(item, behaviour => behaviour.OnLost(CreateContext(item)));
             return true;
         }
         /// <summary>
@@ -208,6 +222,39 @@ namespace Project.Items._Inventory
             }
             Debug.Log($"Inventory: Failed to remove {countToRemove} Items({itemId})");
             return false;
+        }
+
+        public void UseItem(IItem item)
+        {
+            // Safety check: ensure the item is actually in THIS inventory
+            if (!_items.Contains(item)) return;
+
+            // Execute behaviors
+            ExecuteBehaviour(item, behaviour => behaviour.OnUsed(CreateContext(item)));
+        }
+
+
+        // ──────────────────────────────
+        // Private methods
+        // ──────────────────────────────
+
+        private ItemContext CreateContext(IItem item)
+        {
+            return new ItemContext
+            {
+                Item = item,
+                Inventory = this,
+                Owner = _owner,
+            };
+        }
+        private void ExecuteBehaviour(IItem item, Action<IItemBehaviour> action)
+        {
+            if (item?.Data?.Behaviours == null) return;
+
+            foreach (var behaviour in item.Data.Behaviours)
+            {
+                action?.Invoke(behaviour);
+            }
         }
     }
 }

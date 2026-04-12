@@ -1,5 +1,8 @@
 using Project.Items;
+using Project.Items.Behaviours;
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 namespace Project.UI.Items
 {
@@ -41,10 +44,9 @@ namespace Project.UI.Items
             //Try to modify slot tooltip
             if (slot.TryGetComponent(out InventorySlotTooltipUI slotTooltip))
             {
-                slotTooltip.OnRequestTooltipInfo += (item, lines) =>
-                {
-                    lines.Add($"<b>count:</b> {item.Count}");
-                };
+                // Unsubscribe first to prevent duplicates when the slot is recycled
+                slotTooltip.OnRequestTooltipInfo -= HandleTooltipInfo;
+                slotTooltip.OnRequestTooltipInfo += HandleTooltipInfo;
             }
         }
         protected override void UnbindSlot(InventorySlotUI slot)
@@ -55,6 +57,11 @@ namespace Project.UI.Items
         private void Slot_OnSlotClicked(InventorySlotUI slot)
         {
             OnSlotItemClicked?.Invoke(slot);
+        }
+        // Named method instead of lambda
+        private void HandleTooltipInfo(IItem item, List<string> lines)
+        {
+            lines.Add($"<b>count:</b> {item.Count}");
         }
     }
 }

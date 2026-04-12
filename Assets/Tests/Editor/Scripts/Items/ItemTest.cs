@@ -1,6 +1,8 @@
 using NUnit.Framework;
 using Project.Items;
+using Project.Items.Behaviours;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.TestTools;
@@ -18,6 +20,8 @@ namespace Project.Testing.Editor.Items
             public int StackSize { get; set; }
 
             public AssetReferenceSprite IconSprite => throw new System.NotImplementedException();
+
+            public IReadOnlyList<IItemBehaviour> Behaviours => throw new System.NotImplementedException();
         }
 
         private MockItemData _testData;

@@ -81,7 +81,8 @@ namespace Project.Items
         {
             return Data != null
                 && other != null && other.Data != null
-                && Data.Id == other.Data.Id;
+                && Data.Id == other.Data.Id
+                ;
         }
 
         public override string ToString()

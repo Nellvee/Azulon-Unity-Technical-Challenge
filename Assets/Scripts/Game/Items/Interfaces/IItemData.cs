@@ -1,3 +1,5 @@
+using Project.Items.Behaviours;
+using System.Collections.Generic;
 using UnityEngine.AddressableAssets;
 
 namespace Project.Items
@@ -15,6 +17,8 @@ namespace Project.Items
         string Description { get; }
         int StackSize { get; }
         AssetReferenceSprite IconSprite { get; }
+        IReadOnlyList<IItemBehaviour> Behaviours { get; }
+
         //something else?...quality?..tags?..WorldItemAssetReference?..
     }
 }

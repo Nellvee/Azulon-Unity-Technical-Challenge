@@ -5,6 +5,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.UI;
+using static UnityEditor.Progress;
 
 namespace Project.UI.Items
 {

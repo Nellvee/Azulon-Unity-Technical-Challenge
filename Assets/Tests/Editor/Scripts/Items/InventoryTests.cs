@@ -1,8 +1,11 @@
 using NUnit.Framework;
 using Project.Items;
 using Project.Items._Inventory;
+using Project.Items.Behaviours;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using UnityEngine;
 using UnityEngine.AddressableAssets;
 
 namespace Project.Testing.Editor.Items
@@ -18,6 +21,8 @@ namespace Project.Testing.Editor.Items
             public int StackSize { get; set; }
 
             public AssetReferenceSprite IconSprite => throw new System.NotImplementedException();
+
+            public IReadOnlyList<IItemBehaviour> Behaviours => new List<IItemBehaviour>();
         }
 
         private class MockFactory : IItemFactory
@@ -39,8 +44,9 @@ namespace Project.Testing.Editor.Items
         [SetUp]
         public void Setup()
         {
+            GameObject player = new GameObject();
             _factory = new MockFactory();
-            _inventory = new Inventory(_factory, 5); // 5 slots max
+            _inventory = new Inventory(player, _factory, 5); // 5 slots max
             _swordData = new MockItemData { Id = "iron_sword", StackSize = 1 };
         }
 
@@ -115,6 +121,67 @@ namespace Project.Testing.Editor.Items
             //slot 0 deleted, slot 1 - 5 remaining, slot 5 still 5.
             Assert.AreEqual(10, _inventory.Items.Sum(i => i.Count));
             Assert.AreEqual(2, _inventory.Items.Count);
+        }
+        [Test]
+        public void RemoveById_Multiple_FromLast()
+        {
+            var oreData = new MockItemData { Id = "iron_ore", StackSize = 10 };
+            Item item = new Item(oreData, 10);
+            Item item2 = new Item(oreData, 1);
+            _inventory.TryAddItem(item);
+            _inventory.TryAddItem(item2);
+            //slot 0 - 10, slot 1 - 1
+
+            Debug.Log("Inventory:");
+            foreach (var i in _inventory.Items)
+            {
+                Debug.Log($"Item: {i}");
+            }
+            var itemToRemove = _inventory.Items[1];
+            Debug.Log($"Removing item: {itemToRemove}");
+            bool success = _inventory.TryRemoveItem(itemToRemove, 1);
+            Assert.IsTrue(success);
+            Debug.Log("Inventory after remove:");
+            foreach (var i in _inventory.Items)
+            {
+                Debug.Log($"Item: {i}");
+            }
+            Assert.AreEqual(10, _inventory.Items.Sum(i => i.Count));
+            Assert.AreEqual(1, _inventory.Items.Count);
+            Assert.AreEqual(item.Data, _inventory.Items[0].Data);
+            Assert.AreEqual(10, _inventory.Items[0].Count);
+
+        }
+
+        [Test]
+        public void RemoveById_Multiple_FromLast2()
+        {
+            var oreData = new MockItemData { Id = "iron_ore", StackSize = 1 };
+            Item item = new Item(oreData, 1);
+            Item item2 = new Item(oreData, 1);
+            _inventory.TryAddItem(item);
+            _inventory.TryAddItem(item2);
+            //slot 0 - 1, slot 1 - 1
+
+            Debug.Log("Inventory:");
+            foreach (var i in _inventory.Items)
+            {
+                Debug.Log($"Item: {i}");
+            }
+            var itemToRemove = _inventory.Items[1];
+            Debug.Log($"Removing item: {itemToRemove}");
+            bool success = _inventory.TryRemoveItem(itemToRemove, 1);
+            Assert.IsTrue(success);
+            Debug.Log("Inventory after remove:");
+            foreach (var i in _inventory.Items)
+            {
+                Debug.Log($"Item: {i}");
+            }
+            Assert.AreEqual(1, _inventory.Items.Sum(i => i.Count));
+            Assert.AreEqual(1, _inventory.Items.Count);
+            Assert.AreEqual(item.Data, _inventory.Items[0].Data);
+            Assert.AreEqual(1, _inventory.Items[0].Count);
+
         }
         #endregion
 

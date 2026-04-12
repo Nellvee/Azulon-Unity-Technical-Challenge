@@ -29,3 +29,5 @@ MonoBehaviour:
     m_SubObjectType: 
     m_SubObjectGUID: 
     m_EditorAssetChanged: 0
+  _behaviours:
+  - {fileID: 11400000, guid: c3064050be533c04f993e455e41f03ac, type: 2}

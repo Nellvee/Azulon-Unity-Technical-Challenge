@@ -1,6 +1,7 @@
 using Project.Items;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine.AddressableAssets;
 namespace Project.UI.Items
 {
@@ -24,6 +25,7 @@ namespace Project.UI.Items
             if (handle.Status == UnityEngine.ResourceManagement.AsyncOperations.AsyncOperationStatus.Succeeded)
             {
                 _allItemTemplates = new List<IItemData>(handle.Result);
+                _allItemTemplates = _allItemTemplates.OrderBy(x => x.Id).ToList();
                 SetData(_allItemTemplates);
             }
         }
